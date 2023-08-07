@@ -1,0 +1,21 @@
+<div class="card" *ngIf="userTasks().length > 0">
+  <div class="card-header">
+    {{pageTitle()}}
+  </div>
+  <div class="card-body">
+     <div *ngFor="let task of userTasks()">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>{{task.title}} </h4>
+        </div>
+        <div class="col-md-2">
+          {{task.completed}}
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-danger" *ngIf="!task.completed"  (click)="markComplete(task)">Complete</button>
+        </div>
+      </div>
+      <hr>
+     </div>
+  </div>
+</div>

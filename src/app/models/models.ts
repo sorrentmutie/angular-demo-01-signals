@@ -35,7 +35,7 @@ export interface Post {
     body: string
 }
 
-export interface ToDO {
+export interface ToDo {
   userId: number
     id: number
     title: string
