@@ -12,10 +12,9 @@ export class UserTodosComponent {
   userTasks = this.service.userTasks;
   completedCount = computed(
     () => (this.userTasks().filter(task => task.completed)).length);
-  pageTitle =  computed(
-     () =>'User ToDos. Completed: ' + this.completedCount());
 
-  markComplete(task:ToDo) {
-    this.service.markComplete(task);
-  }
+  pageTitle =  computed(
+     () =>'User ToDos Completed: ' + this.completedCount());
+
+  
 }

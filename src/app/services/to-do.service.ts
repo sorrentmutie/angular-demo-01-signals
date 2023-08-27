@@ -13,21 +13,9 @@ export class ToDoService {
   userService = inject(PlaceholderService);
   todoUrl = 'https://jsonplaceholder.typicode.com/todos?userId=';
 
-  userTasks = signal<ToDo[]>([]);
-
-
-  userTasks$ = toObservable((this.userService.selectedUserId))
-    .pipe(switchMap( userId =>
-      this.httpService.get<ToDo[]>(this.todoUrl + userId)
-        .pipe(tap( tasks => this.userTasks.set(tasks))
-    )));
-
-  readOnlyUserTasks = toSignal(this.userTasks$, {initialValue: [] as ToDo[]});
-
-
-  markComplete(task: ToDo) {
-   this.userTasks.mutate( () => task.completed = true );
-  }
-
-  constructor() { }
+  private userTasks$ = toObservable(this.userService.selectedUserId)
+    .pipe(
+      switchMap( userId =>
+       this.httpService.get<ToDo[]>(this.todoUrl + userId)));
+        userTasks = toSignal(this.userTasks$, {initialValue: [] as ToDo[]});
 }
